@@ -3,6 +3,7 @@
 echo "Installing basic things..."
 sudo apt update
 sudo apt install curl exfat-fuse exfat-utils gcc g++ make build-essential wget htop terminator slack -y
+sudo sysctl net.ipv6.conf.all.disable_ipv6=1  # quick fix for add-apt-repository to work faster
 echo "DONE!"
 
 echo "Installing VSCode"
@@ -15,7 +16,7 @@ echo "DONE!"
 
 echo "Lets install Docker"
 sudo apt remove docker docker-engine docker.io -y
-sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+sudo apt install apt-transport-https ca-certificates curl software-properties-common     -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 apt-key fingerprint 0EBFCD88
 echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
@@ -50,6 +51,18 @@ echo "DONE!"
 echo "Installing K3D"
 curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | TAG=v3.4.0 bash
 echo "DONE!"
+
+echo "Installing Python 3.9"
+sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev wget libbz2-dev -y
+curl https://www.python.org/ftp/python/3.9.1/Python-3.9.1.tgz --output Python-3.9.1.tgz
+tar xf Python-3.9.1.tgz
+cd Python-3.9.1
+./configure --enable-optimizations
+make -j 12
+sudo make altinstall
+sudo rm -rf Python-3.9.1*
+echo "DONE!"
+
 
 sudo apt upgrade
 sudo apt autoremove -y
