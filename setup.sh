@@ -50,6 +50,12 @@ echo "DONE!"
 
 echo "Installing K3D"
 curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | TAG=v3.4.0 bash
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt update
+sudo apt install -y kubectl
+
 echo "DONE!"
 
 echo "Installing Python 3.9"
