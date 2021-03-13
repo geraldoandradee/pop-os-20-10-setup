@@ -39,11 +39,6 @@ sudo apt update
 sudo apt install yarn -y
 echo "DONE!"
 
-echo "Installing Java 15"
-sudo add-apt-repository ppa:linuxuprising/java -y
-sudo apt install oracle-java15-installer -y
-echo "DONE!"
-
 echo "Installing miscellaneous"
 sudo apt install steam -y
 echo "DONE!"
